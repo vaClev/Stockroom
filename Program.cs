@@ -12,10 +12,43 @@ Console.WriteLine("Hello, World!");
 
 
 CategoryDB categoryDb = new CategoryDB();
-Category category = new Category("Продукты", 0);
+/*Category category = new Category("Продукты", 0);
 Category category2 = new Category("Milks", 1);
 Category category3 = new Category("Meat", 1);
-categoryDb.AddCategory(category3);
+categoryDb.AddCategory(category);*/
+
+
+var categories = categoryDb.GetCategories();
+if (categories != null)
+{
+    foreach (var cat in categories)
+    {
+        Console.WriteLine($"{cat.id} {cat.name} {cat.parentId}");
+    }
+}
+
+Console.WriteLine("\n\nOk. Get me #2");
+var secondCategory = categoryDb.GetCategory(2);
+Console.WriteLine($"{secondCategory.id} {secondCategory.name} {secondCategory.parentId}");
+
+
+
+//Тест ProductsDB
+var productsDb = new ProductsDB();
+
+var products = productsDb.GetProducts();
+if (products != null)
+{
+    foreach (var prod in products)
+    {
+        Console.WriteLine($"{prod.id} {prod.name} {prod.description} " +
+            $"{categoryDb.GetCategory(prod.categoryId).name} " +
+            $"{prod.supplierId}");
+    }
+}
+
+
+
 /*
 
 //где-то внутри класса Application

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Stockroom.DBUtils
 {
+    public delegate void CallbackParseObject(SqlDataReader reader);
     public class DBHelper_old  //TODO: убрать public. Должен быть доступен только классу Stockroom.
     {
         private static DBHelper_old instance = null;
@@ -20,8 +23,6 @@ namespace Stockroom.DBUtils
             string cs = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             connection.ConnectionString = cs;
         }
-
-
         public static DBHelper_old GetDBHelper()
         {
             if (instance == null)
@@ -30,8 +31,6 @@ namespace Stockroom.DBUtils
             }
             return instance;
         }
-
-
 
         public void TestInsertQuery()
         {
@@ -52,6 +51,33 @@ namespace Stockroom.DBUtils
             }
             finally
             {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public void SelectQuery(string selectString, CallbackParseObject Parse)
+        {
+            SqlDataReader reader = null;
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(selectString, connection);
+                reader = cmd.ExecuteReader();
+                Parse(reader);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
                 if (connection != null)
                 {
                     connection.Close();

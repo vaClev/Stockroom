@@ -15,7 +15,7 @@ namespace Stockroom.Models
 
 
 
-        //Конструктор для товаров перед добавлением их в базу данных. Id присвоит СУБД
+        //Конструктор для объектов перед добавлением их в базу данных. Id присвоит СУБД
         public Category(string name, UInt64? parentId = null)
         {
             this.name = name;
@@ -25,6 +25,14 @@ namespace Stockroom.Models
             } else {
                 this.parentId = null;
             }
+        }
+
+        //Конструктор для объектов извлеченных из БД
+        public Category(UInt64 id, string name, UInt64? parentId)
+        {
+            this.id = id;
+            this.name = name;
+            this.parentId = parentId;
         }
     }
 }

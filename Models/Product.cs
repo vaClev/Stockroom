@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Stockroom.DBUtils;
 
 namespace Stockroom.Models
 {
     public class Product
     {
-   
+
         /// Уникальный идентификатор продукта
         public UInt64 id { get; set; }  //TODO: перейти на Guid 
 
@@ -26,10 +28,16 @@ namespace Stockroom.Models
 
 
         //Конструктор для товаров перед добавлением их в базу данных. Id присвоит СУБД
-        public Product(string name, string descriptoon, UInt64 categoryId, UInt64 supplierId) 
+        public Product(string name, string descriptoon, UInt64 categoryId, UInt64 supplierId)  
+            : this(0, name, descriptoon, categoryId, supplierId )
         {
+        }
+
+        public Product(UInt64 id, string name, string description, ulong categoryId, ulong supplierId)
+        {
+            this.id = id;
             this.name = name;
-            this.description = descriptoon;
+            this.description = description;
             this.categoryId = categoryId;
             this.supplierId = supplierId;
         }

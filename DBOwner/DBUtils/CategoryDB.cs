@@ -10,13 +10,13 @@ using Stockroom.Models;
 
 namespace Stockroom.DBUtils
 {
-    class CategoryDB
+    internal class CategoryDB
     {
         static private readonly string insertTemplate = @"insert into Categories (Name, ParentId) values ('{0}', {1})"; //TODO: спрятать в ресурсы или конфиги. Но в учебном проекте пойдет
         static private readonly string selectAllTemplate = @"select * from Categories";
         static private readonly string selectByIdTemplate = @"select * from Categories where CategoryId = {0}";
 
-        IEnumerable<Category> tempParsedCategories = null;
+        IEnumerable<Category> tempParsedCategories;
 
         public void AddCategory(Category category)
         {
@@ -40,11 +40,11 @@ namespace Stockroom.DBUtils
             return tempParsedCategories;
         }
 
-        public Category GetCategory(UInt64 id)
+        public Category? GetCategory(UInt64 id)
         {
             var preparedSqlSelectQuery = string.Format(selectByIdTemplate, id.ToString());
             DBHelper_old.GetDBHelper().SelectQuery(preparedSqlSelectQuery, ParseCategies);
-            return tempParsedCategories.First();
+            return tempParsedCategories.FirstOrDefault();
         }
 
         //Работает с reader но не владеет им

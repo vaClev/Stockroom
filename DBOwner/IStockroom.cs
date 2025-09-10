@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Stockroom.Models;
 
-namespace Stockroom.DBOwner
+namespace Stockroom.DBUtils
 {
     interface IStockroom
     {

@@ -3,25 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Stockroom.DBUtils;
 using Stockroom.Models;
 
-namespace Stockroom.DBOwner
+namespace Stockroom.DBUtils
 {
     public class Stockroom : IStockroom
     {
+        private CategoryDB categoryDB = new CategoryDB();
+        private SuppliersDB suppliersDB = new SuppliersDB();
+        private ProductsDB productsDB = new ProductsDB();
+
         public void AddCategory(Category category)
         {
-            throw new NotImplementedException();
+            categoryDB.AddCategory(category);
         }
 
         public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            productsDB.AddProduct(product);
         }
 
         public void AddSupplier(Supplier supplier)
         {
-            throw new NotImplementedException();
+            suppliersDB.AddSupplier(supplier);
         }
 
         public void DeleteProduct(ulong id)
@@ -31,17 +36,17 @@ namespace Stockroom.DBOwner
 
         public IEnumerable<Category> GetCategories()
         {
-            throw new NotImplementedException();
+            return categoryDB.GetCategories();
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            throw new NotImplementedException();
+            return productsDB.GetProducts();
         }
 
         public IEnumerable<Supplier> GetSuppliers()
         {
-            throw new NotImplementedException();
+            return suppliersDB.GetSuppliers();
         }
       
     }

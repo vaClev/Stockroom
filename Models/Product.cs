@@ -33,6 +33,7 @@ namespace Stockroom.Models
         {
         }
 
+        //Конструктор для извекаемых из БД товаров 
         public Product(UInt64 id, string name, string description, ulong categoryId, ulong supplierId)
         {
             this.id = id;

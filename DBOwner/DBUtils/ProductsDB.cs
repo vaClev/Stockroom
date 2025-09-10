@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using Stockroom.Models;
 
 namespace Stockroom.DBUtils
 {
-    class ProductsDB
+    internal class ProductsDB
     {
         static private readonly string insertTemplate =
             @"INSERT INTO Products (Name, Description, CategoryId, SupplierId) VALUES ('{0}', '{1}', {2}, {3})";

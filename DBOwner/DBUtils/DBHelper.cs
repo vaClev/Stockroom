@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Stockroom.DBUtils
 {
     public delegate void CallbackParseObject(SqlDataReader reader);
-    public class DBHelper_old  //TODO: убрать public. Должен быть доступен только классу Stockroom.
+    internal class DBHelper_old  //TODO: убрать public. Должен быть доступен только классу Stockroom.
     {
         private static DBHelper_old instance = null;
         SqlConnection connection = null;

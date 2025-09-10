@@ -13,10 +13,15 @@ namespace Stockroom.Models
         public string name { get; set; } /// Наименование поставщика
 
 
-
         //Конструктор для товаров перед добавлением их в базу данных. Id присвоит СУБД
-        public Supplier(string name)
+        public Supplier(string name) : this(0, name)
         {
+        }
+
+        //Конструктор для извекаемых из БД поставщиков 
+        public Supplier(ulong id, string name)
+        {
+            this.id = id;
             this.name = name;
         }
     }
